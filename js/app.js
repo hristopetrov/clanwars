@@ -91,7 +91,6 @@
     var data = Url.parseQuery(urlstring);
     data['howmany'] = true;
     checkNumberCombos(data);
-    $('html, body').animate({scrollTop:$(document).height()}, 'slow');
   })
 
 function startSearchingDecks(answer){

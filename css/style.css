@@ -1,0 +1,125 @@
+.bg-dark{
+    background-color: #292b2c !important;
+}
+.text-white{
+    color: #fff!important;
+}
+.btn-outline-secondary{
+    color: #fff;
+}
+.cr-card, .cr-card-const {
+    float: left;
+    height: 95px;
+    width: 79px;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+}
+.container{
+    max-width:1140px;
+    margin:auto;
+}
+.card_picker .cr-card, .cr-card.dimmed {
+    opacity: .3;
+    filter: grayscale(70%);
+}
+.constCards .cr-card-const, .cr-card.dimmed {
+    opacity: .3;
+    filter: grayscale(70%);
+}
+body{
+    background-color: #212523 !important;
+}
+a:hover>img.cr-card {
+opacity: 0.8 !important;
+filter: none;
+}
+.card_picker .cr-card.active {
+opacity: 1;
+filter: none;
+}
+.constCards .cr-card-const.active1 {
+opacity: 1;
+filter: none;
+}
+.text-center {
+text-align: center!important;
+}
+h1{
+    color:white !important;
+    text-align:center;
+}
+#card_picker{
+    margin:40px 0;
+}
+.constCards{
+    margin:40px 0;
+}
+.progress{
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.progress-bar-title {
+    position: absolute;
+    text-align: center;
+    line-height: 20px; 
+    overflow: hidden;
+    color: #333;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+.deck-card{
+    height: auto;
+    width: 24.9%;
+}
+.deck-container{
+    margin-bottom: 2rem!important
+}
+
+.link-deckshop{
+    padding: 5px 0;
+    margin: 5px 0;
+    text-align: center;
+}
+.link-deckshop a{
+    font-weight: bold;
+}
+.elixir{
+    color: magenta;
+    font-size: 1.75rem;
+    display: inline-block;
+    width: 26%;
+    text-align: center
+}
+
+.gold{
+    display: inline-block;
+}
+.green{
+    display: inline-block;
+}
+
+.silver{
+    display: inline-block;
+}
+.list-greatest-decks{
+    padding: 40px 0;
+}
+.type-deck-bronze, .type-deck-silver, .type-deck-gold{
+    display: inline-block;
+    width: 72%;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.type-deck-bronze{
+    background-color: #cd7f32;
+}
+.type-deck-silver{
+    background-color: silver;
+}
+.type-deck-gold{
+    background-color: gold;
+}

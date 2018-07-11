@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/urljs/1.2.0/url.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+        <div class="container allcardslist" id="firststep">
+            <div class="jumbotron jumbotron-fluid bg-dark"><h2 class="text-white">Select the cards you want to include in the search<span class="btn btn-primary pull-right" id="btn_edit" style="display:none">
+                    <a href="#" class="btn btn-outline-secondary">Edit</a>
+                </span></h2></div>
+                <div id="card_picker" class="card_picker clearfix list-of-cards">
+                        <a href="#" class="card_link" data-hash="Skellies" data-elixir="1" data-rarity="1" data-arena="2"><img src="cards-images/Skellies.png" class="cr-card" id="card_Skellies"></a>
+                        <a href="#" class="card_link" data-hash="IceSpirit" data-elixir="1" data-rarity="1" data-arena="8"><img src="cards-images/IceSpirit.png" class="cr-card" id="card_IceSpirit"></a>
+                        <a href="#" class="card_link" data-hash="Gobs" data-elixir="2" data-rarity="1" data-arena="1"><img src="cards-images/Gobs.png" class="cr-card" id="card_Gobs"></a>
+                        <a href="#" class="card_link" data-hash="Snowball" data-elixir="2" data-rarity="1" data-arena="8"><img src="cards-images/Snowball.png" class="cr-card" id="card_Snowball"></a>
+                        <a href="#" class="card_link" data-hash="SpearGobs" data-elixir="2" data-rarity="1" data-arena="1"><img src="cards-images/SpearGobs.png" class="cr-card" id="card_SpearGobs"></a>
+                        <a href="#" class="card_link" data-hash="FireSpirits" data-elixir="2" data-rarity="1" data-arena="5"><img src="cards-images/FireSpirits.png" class="cr-card" id="card_FireSpirits"></a>
+                        <a href="#" class="card_link" data-hash="Zap" data-elixir="2" data-rarity="1" data-arena="5"><img src="cards-images/Zap.png" class="cr-card" id="card_Zap"></a>
+                        <a href="#" class="card_link" data-hash="Bats" data-elixir="2" data-rarity="1" data-arena="8"><img src="cards-images/Bats.png" class="cr-card" id="card_Bats"></a>
+                        <a href="#" class="card_link" data-hash="Archers" data-elixir="3" data-rarity="1" data-arena="0"><img src="cards-images/Archers.png" class="cr-card" id="card_Archers"></a>
+                        <a href="#" class="card_link" data-hash="Arrows" data-elixir="3" data-rarity="1" data-arena="0"><img src="cards-images/Arrows.png" class="cr-card" id="card_Arrows"></a>
+                        <a href="#" class="card_link" data-hash="Bomber" data-elixir="3" data-rarity="1" data-arena="0"><img src="cards-images/Bomber.png" class="cr-card" id="card_Bomber"></a>
+                        <a href="#" class="card_link" data-hash="Knight" data-elixir="3" data-rarity="1" data-arena="0"><img src="cards-images/Knight.png" class="cr-card" id="card_Knight"></a>
+                        <a href="#" class="card_link" data-hash="Minions" data-elixir="3" data-rarity="1" data-arena="2"><img src="cards-images/Minions.png" class="cr-card" id="card_Minions"></a>
+                        <a href="#" class="card_link" data-hash="Cannon" data-elixir="3" data-rarity="1" data-arena="3"><img src="cards-images/Cannon.png" class="cr-card" id="card_Cannon"></a>
+                        <a href="#" class="card_link" data-hash="SkellyBarrel" data-elixir="3" data-rarity="1" data-arena="6"><img src="cards-images/SkellyBarrel.png" class="cr-card" id="card_SkellyBarrel"></a>
+                        <a href="#" class="card_link" data-hash="GobGang" data-elixir="3" data-rarity="1" data-arena="9"><img src="cards-images/GobGang.png" class="cr-card" id="card_GobGang"></a>
+                        <a href="#" class="card_link" data-hash="Tesla" data-elixir="4" data-rarity="1" data-arena="4"><img src="cards-images/Tesla.png" class="cr-card" id="card_Tesla"></a>
+                        <a href="#" class="card_link" data-hash="Mortar" data-elixir="4" data-rarity="1" data-arena="6"><img src="cards-images/Mortar.png" class="cr-card" id="card_Mortar"></a>
+                        <a href="#" class="card_link" data-hash="Barbs" data-elixir="5" data-rarity="1" data-arena="3"><img src="cards-images/Barbs.png" class="cr-card" id="card_Barbs"></a>
+                        <a href="#" class="card_link" data-hash="Horde" data-elixir="5" data-rarity="1" data-arena="4"><img src="cards-images/Horde.png" class="cr-card" id="card_Horde"></a>
+                        <a href="#" class="card_link" data-hash="Rascals" data-elixir="5" data-rarity="1" data-arena="9"><img src="cards-images/Rascals.png" class="cr-card" id="card_Rascals"></a>
+                        <a href="#" class="card_link" data-hash="eBarbs" data-elixir="6" data-rarity="1" data-arena="7"><img src="cards-images/eBarbs.png" class="cr-card" id="card_eBarbs"></a>
+                        <a href="#" class="card_link" data-hash="RG" data-elixir="6" data-rarity="1" data-arena="7"><img src="cards-images/RG.png" class="cr-card" id="card_RG"></a>
+                        <a href="#" class="card_link" data-hash="IceGolem" data-elixir="2" data-rarity="2" data-arena="8"><img src="cards-images/IceGolem.png" class="cr-card" id="card_IceGolem"></a>
+                        <a href="#" class="card_link" data-hash="Tombstone" data-elixir="3" data-rarity="2" data-arena="2"><img src="cards-images/Tombstone.png" class="cr-card" id="card_Tombstone"></a>
+                        <a href="#" class="card_link" data-hash="MM" data-elixir="3" data-rarity="2" data-arena="7"><img src="cards-images/MM.png" class="cr-card" id="card_MM"></a>
+                        <a href="#" class="card_link" data-hash="DartGob" data-elixir="3" data-rarity="2" data-arena="9"><img src="cards-images/DartGob.png" class="cr-card" id="card_DartGob"></a>
+                        <a href="#" class="card_link" data-hash="Heal" data-elixir="3" data-rarity="2" data-arena="10"><img src="cards-images/Heal.png" class="cr-card" id="card_Heal"></a>
+                        <a href="#" class="card_link" data-hash="Fireball" data-elixir="4" data-rarity="2" data-arena="0"><img src="cards-images/Fireball.png" class="cr-card" id="card_Fireball"></a>
+                        <a href="#" class="card_link" data-hash="MP" data-elixir="4" data-rarity="2" data-arena="0"><img src="cards-images/MP.png" class="cr-card" id="card_MP"></a>
+                        <a href="#" class="card_link" data-hash="Musk" data-elixir="4" data-rarity="2" data-arena="0"><img src="cards-images/Musk.png" class="cr-card" id="card_Musk"></a>
+                        <a href="#" class="card_link" data-hash="Valk" data-elixir="4" data-rarity="2" data-arena="1"><img src="cards-images/Valk.png" class="cr-card" id="card_Valk"></a>
+                        <a href="#" class="card_link" data-hash="Hog" data-elixir="4" data-rarity="2" data-arena="4"><img src="cards-images/Hog.png" class="cr-card" id="card_Hog"></a>
+                        <a href="#" class="card_link" data-hash="Furnace" data-elixir="4" data-rarity="2" data-arena="5"><img src="cards-images/Furnace.png" class="cr-card" id="card_Furnace"></a>
+                        <a href="#" class="card_link" data-hash="Ram" data-elixir="4" data-rarity="2" data-arena="6"><img src="cards-images/Ram.png" class="cr-card" id="card_Ram"></a>
+                        <a href="#" class="card_link" data-hash="FlyingMachine" data-elixir="4" data-rarity="2" data-arena="9"><img src="cards-images/FlyingMachine.png" class="cr-card" id="card_FlyingMachine"></a>
+                        <a href="#" class="card_link" data-hash="Zappies" data-elixir="4" data-rarity="2" data-arena="11"><img src="cards-images/Zappies.png" class="cr-card" id="card_Zappies"></a>
+                        <a href="#" class="card_link" data-hash="Giant" data-elixir="5" data-rarity="2" data-arena="0"><img src="cards-images/Giant.png" class="cr-card" id="card_Giant"></a>
+                        <a href="#" class="card_link" data-hash="GobHut" data-elixir="5" data-rarity="2" data-arena="1"><img src="cards-images/GobHut.png" class="cr-card" id="card_GobHut"></a>
+                        <a href="#" class="card_link" data-hash="BombTower" data-elixir="5" data-rarity="2" data-arena="2"><img src="cards-images/BombTower.png" class="cr-card" id="card_BombTower"></a>
+                        <a href="#" class="card_link" data-hash="Inferno" data-elixir="5" data-rarity="2" data-arena="4"><img src="cards-images/Inferno.png" class="cr-card" id="card_Inferno"></a>
+                        <a href="#" class="card_link" data-hash="Wiz" data-elixir="5" data-rarity="2" data-arena="5"><img src="cards-images/Wiz.png" class="cr-card" id="card_Wiz"></a>
+                        <a href="#" class="card_link" data-hash="RoyalHogs" data-elixir="5" data-rarity="2" data-arena="10"><img src="cards-images/RoyalHogs.png" class="cr-card" id="card_RoyalHogs"></a>
+                        <a href="#" class="card_link" data-hash="Rocket" data-elixir="6" data-rarity="2" data-arena="3"><img src="cards-images/Rocket.png" class="cr-card" id="card_Rocket"></a>
+                        <a href="#" class="card_link" data-hash="Pump" data-elixir="6" data-rarity="2" data-arena="6"><img src="cards-images/Pump.png" class="cr-card" id="card_Pump"></a>
+                        <a href="#" class="card_link" data-hash="BarbHut" data-elixir="7" data-rarity="2" data-arena="3"><img src="cards-images/BarbHut.png" class="cr-card" id="card_BarbHut"></a>
+                        <a href="#" class="card_link" data-hash="3M" data-elixir="9" data-rarity="2" data-arena="7"><img src="cards-images/3M.png" class="cr-card" id="card_3M"></a>
+                        <a href="#" class="card_link" data-hash="Mirror" data-elixir="2" data-rarity="3" data-arena="5"><img src="cards-images/Mirror.png" class="cr-card" id="card_Mirror"></a>
+                        <a href="#" class="card_link" data-hash="Rage" data-elixir="2" data-rarity="3" data-arena="3"><img src="cards-images/Rage.png" class="cr-card" id="card_Rage"></a>
+                        <a href="#" class="card_link" data-hash="Skarmy" data-elixir="3" data-rarity="3" data-arena="0"><img src="cards-images/Skarmy.png" class="cr-card" id="card_Skarmy"></a>
+                        <a href="#" class="card_link" data-hash="Barrel" data-elixir="3" data-rarity="3" data-arena="1"><img src="cards-images/Barrel.png" class="cr-card" id="card_Barrel"></a>
+                        <a href="#" class="card_link" data-hash="Tornado" data-elixir="3" data-rarity="3" data-arena="6"><img src="cards-images/Tornado.png" class="cr-card" id="card_Tornado"></a>
+                        <a href="#" class="card_link" data-hash="Guards" data-elixir="3" data-rarity="3" data-arena="7"><img src="cards-images/Guards.png" class="cr-card" id="card_Guards"></a>
+                        <a href="#" class="card_link" data-hash="Clone" data-elixir="3" data-rarity="3" data-arena="8"><img src="cards-images/Clone.png" class="cr-card" id="card_Clone"></a>
+                        <a href="#" class="card_link" data-hash="BarbBarrel" data-elixir="3" data-rarity="3" data-arena="10"><img src="cards-images/BarbBarrel.png" class="cr-card" id="card_BarbBarrel"></a>
+                        <a href="#" class="card_link" data-hash="BabyD" data-elixir="4" data-rarity="3" data-arena="0"><img src="cards-images/BabyD.png" class="cr-card" id="card_BabyD"></a>
+                        <a href="#" class="card_link" data-hash="Freeze" data-elixir="4" data-rarity="3" data-arena="4"><img src="cards-images/Freeze.png" class="cr-card" id="card_Freeze"></a>
+                        <a href="#" class="card_link" data-hash="Poison" data-elixir="4" data-rarity="3" data-arena="5"><img src="cards-images/Poison.png" class="cr-card" id="card_Poison"></a>
+                        <a href="#" class="card_link" data-hash="DarkPrince" data-elixir="4" data-rarity="3" data-arena="7"><img src="cards-images/DarkPrince.png" class="cr-card" id="card_DarkPrince"></a>
+                        <a href="#" class="card_link" data-hash="Hunter" data-elixir="4" data-rarity="3" data-arena="9"><img src="cards-images/Hunter.png" class="cr-card" id="card_Hunter"></a>
+                        <a href="#" class="card_link" data-hash="Prince" data-elixir="5" data-rarity="3" data-arena="0"><img src="cards-images/Prince.png" class="cr-card" id="card_Prince"></a>
+                        <a href="#" class="card_link" data-hash="Witch" data-elixir="5" data-rarity="3" data-arena="0"><img src="cards-images/Witch.png" class="cr-card" id="card_Witch"></a>
+                        <a href="#" class="card_link" data-hash="Balloon" data-elixir="5" data-rarity="3" data-arena="2"><img src="cards-images/Balloon.png" class="cr-card" id="card_Balloon"></a>
+                        <a href="#" class="card_link" data-hash="Bowler" data-elixir="5" data-rarity="3" data-arena="8"><img src="cards-images/Bowler.png" class="cr-card" id="card_Bowler"></a>
+                        <a href="#" class="card_link" data-hash="Exe" data-elixir="5" data-rarity="3" data-arena="9"><img src="cards-images/Exe.png" class="cr-card" id="card_Exe"></a>
+                        <a href="#" class="card_link" data-hash="CannonCart" data-elixir="5" data-rarity="3" data-arena="10"><img src="cards-images/CannonCart.png" class="cr-card" id="card_CannonCart"></a>
+                        <a href="#" class="card_link" data-hash="Lightning" data-elixir="6" data-rarity="3" data-arena="1"><img src="cards-images/Lightning.png" class="cr-card" id="card_Lightning"></a>
+                        <a href="#" class="card_link" data-hash="GiantSkelly" data-elixir="6" data-rarity="3" data-arena="2"><img src="cards-images/GiantSkelly.png" class="cr-card" id="card_GiantSkelly"></a>
+                        <a href="#" class="card_link" data-hash="XBow" data-elixir="6" data-rarity="3" data-arena="3"><img src="cards-images/XBow.png" class="cr-card" id="card_XBow"></a>
+                        <a href="#" class="card_link" data-hash="PEKKA" data-elixir="7" data-rarity="3" data-arena="4"><img src="cards-images/PEKKA.png" class="cr-card" id="card_PEKKA"></a>
+                        <a href="#" class="card_link" data-hash="Golem" data-elixir="8" data-rarity="3" data-arena="6"><img src="cards-images/Golem.png" class="cr-card" id="card_Golem"></a>
+                        <a href="#" class="card_link" data-hash="Log" data-elixir="2" data-rarity="4" data-arena="6"><img src="cards-images/Log.png" class="cr-card" id="card_Log"></a>
+                        <a href="#" class="card_link" data-hash="IceWiz" data-elixir="3" data-rarity="4" data-arena="5"><img src="cards-images/IceWiz.png" class="cr-card" id="card_IceWiz"></a>
+                        <a href="#" class="card_link" data-hash="Miner" data-elixir="3" data-rarity="4" data-arena="6"><img src="cards-images/Miner.png" class="cr-card" id="card_Miner"></a>
+                        <a href="#" class="card_link" data-hash="Princess" data-elixir="3" data-rarity="4" data-arena="7"><img src="cards-images/Princess.png" class="cr-card" id="card_Princess"></a>
+                        <a href="#" class="card_link" data-hash="Bandit" data-elixir="3" data-rarity="4" data-arena="9"><img src="cards-images/Bandit.png" class="cr-card" id="card_Bandit"></a>
+                        <a href="#" class="card_link" data-hash="Ghost" data-elixir="3" data-rarity="4" data-arena="10"><img src="cards-images/Ghost.png" class="cr-card" id="card_Ghost"></a>
+                        <a href="#" class="card_link" data-hash="InfernoD" data-elixir="4" data-rarity="4" data-arena="4"><img src="cards-images/InfernoD.png" class="cr-card" id="card_InfernoD"></a>
+                        <a href="#" class="card_link" data-hash="eWiz" data-elixir="4" data-rarity="4" data-arena="7"><img src="cards-images/eWiz.png" class="cr-card" id="card_eWiz"></a>
+                        <a href="#" class="card_link" data-hash="Lumber" data-elixir="4" data-rarity="4" data-arena="8"><img src="cards-images/Lumber.png" class="cr-card" id="card_Lumber"></a>
+                        <a href="#" class="card_link" data-hash="NightWitch" data-elixir="4" data-rarity="4" data-arena="8"><img src="cards-images/NightWitch.png" class="cr-card" id="card_NightWitch"></a>
+                        <a href="#" class="card_link" data-hash="MagicArcher" data-elixir="4" data-rarity="4" data-arena="11"><img src="cards-images/MagicArcher.png" class="cr-card" id="card_MagicArcher"></a>
+                        <a href="#" class="card_link" data-hash="Graveyard" data-elixir="5" data-rarity="4" data-arena="5"><img src="cards-images/Graveyard.png" class="cr-card" id="card_Graveyard"></a>
+                        <a href="#" class="card_link" data-hash="Sparky" data-elixir="6" data-rarity="4" data-arena="6"><img src="cards-images/Sparky.png" class="cr-card" id="card_Sparky"></a>
+                        <a href="#" class="card_link" data-hash="Lava" data-elixir="7" data-rarity="4" data-arena="4"><img src="cards-images/Lava.png" class="cr-card" id="card_Lava"></a>
+                        <a href="#" class="card_link" data-hash="MegaKnight" data-elixir="7" data-rarity="4" data-arena="10"><img src="cards-images/MegaKnight.png" class="cr-card" id="card_MegaKnight"></a>
+            </div>
+    </div>    
+    <div class="container" id="secondstep">
+        <p class="mt-4 text-center clearfix">
+            <a class="btn btn-primary btn-lg  align-content-center mx-auto p-3" id="next_step" href="#">
+                Next step
+            </a>
+        </p>
+    </div> 
+    
+    <div class="container chosen">     
+        <div class="constCards clearfix">
+        </div>
+    </div>
+    <div class="container" id="thirdstep" style="display:none">
+        <p class="mt-4 text-center clearfix">
+            <a class="btn btn-primary btn-lg  align-content-center mx-auto p-3" id="check-combos" href="#">
+                How many combinations?
+            </a>
+        </p>
+    </div>
+
+    <div class="container">
+        <p class="mt-4 text-center clearfix">
+            <h2 id="ncombos"></h2>
+        </p>
+    </div>
+
+    <div class="container" id="fourthstep" style="display:none">
+        <p class="mt-4 text-center clearfix">
+            <a class="btn btn-primary btn-lg  align-content-center mx-auto p-3"  id="start-search" href="#">
+                Search for decks
+            </a>
+        </p>
+    </div>
+    <div class="container" id="stop-search" style="display:none">
+            <p class="mt-4 text-center clearfix">
+                <a class="btn btn-danger btn-lg  align-content-center mx-auto p-3"  id="stop-search-btn" href="#">
+                    Stop the search
+                </a>
+            </p>
+        </div>
+    <div class="container">
+        <div class="progress" style="display:none">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+            <div class="progress-bar-title"></div>
+        </div>
+    </div>
+
+    <div class="container list-greatest-decks">
+
+    </div>
+
+
+<script src="js/app.js"></script>              
+</body>
+</html>
+
+

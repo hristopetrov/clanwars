@@ -9,6 +9,10 @@ $combinatorics = new Math_Combinatorics;
 $allCards = isset($_POST) ? $_POST : '';
 
 $sumElixirConstantCards = isset($_POST['sumElixirConstantCards']) ? $_POST['sumElixirConstantCards'] : '';
+$minElixir = isset($_POST['minElixir']) ? $_POST['minElixir'] : 0;
+$maxElixir = isset($_POST['maxElixir']) ? $_POST['maxElixir'] : 7;
+unset($allCards['maxElixir']);
+unset($allCards['maxElixir']);
 unset($allCards['sumElixirConstantCards']);
 unset($allCards['howmany']);
 
@@ -75,7 +79,7 @@ $linksCombos = [];
 
 $count = 0;
 foreach ($output as $key => $value) {
-	if ((getElixir($value,$allCards,intval($sumElixirConstantCards)) >=3.5) && (getElixir($value,$allCards, intval($sumElixirConstantCards)) <= 4.2) && filterReasonableDecks($value,$allCardsType,$constDeckCards)){
+	if ((getElixir($value,$allCards,intval($sumElixirConstantCards)) >=$minElixir) && (getElixir($value,$allCards, intval($sumElixirConstantCards)) <= $maxElixir) && filterReasonableDecks($value,$allCardsType,$constDeckCards)){
         $implodedRestOfDeck = implode('-',$value);
         $elixir = getElixir($value,$allCards,$sumElixirConstantCards);
         $count++;

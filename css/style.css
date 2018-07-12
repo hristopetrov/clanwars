@@ -3,6 +3,7 @@
 }
 .text-white{
     color: #fff!important;
+    padding: 20px 0;
 }
 .btn-outline-secondary{
     color: #fff;
@@ -122,4 +123,15 @@ h1{
 }
 .type-deck-gold{
     background-color: gold;
+}
+
+#slider-snap-value-lower, 
+#slider-snap-value-upper{
+    position: absolute;
+    top: 3.5rem;
+    right: 2px;
+    color: #fff;
+}
+.noUi-connect{
+    background: magenta;
 }

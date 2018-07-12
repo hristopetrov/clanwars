@@ -32,6 +32,7 @@
       $('#card_picker').hide();
       $('#btn_edit').show();
       $('#next_step').hide();
+      $('#range-elixir').show();
       $('html, body').animate({scrollTop:$(document).height()}, 'slow');
       if($('.chosen').find(".jumbotron").length == 0){
       $('.chosen').prepend('<div class="jumbotron bg-dark"><h2 class="text-white">Select card(s) if you want to implicitly include in all deck combinations.</h2></div>');
@@ -46,6 +47,8 @@
       })  
     
       button['sumElixirConstantCards'] = 0;
+      button['minElixir'] = (Number)($('#slider-snap-value-lower').text());
+      button['maxElixir'] = (Number)($('#slider-snap-value-upper').text());
       var query = Url.stringify(button);
        $('#check-combos').attr('data-combos',query);
        $('#start-search').attr('data-combos',query);
@@ -63,11 +66,15 @@
           }else{
               searchableCards[$(this).attr('data-hash-const')] = $(this).attr('data-elixir-const');
           }         
-      })  
+      })
+      searchableCards['minElixir'] = (Number)($('#slider-snap-value-lower').text());
+      searchableCards['maxElixir'] = (Number)($('#slider-snap-value-upper').text());  
        var query = Url.stringify(searchableCards);
         $('#check-combos').attr('data-combos',query);
         $('#start-search').attr('data-combos',query);
   });
+
+  
 
   $('#start-search').click(function(e){
     e.preventDefault(); 
@@ -193,6 +200,10 @@ function renderDeck(data,position,url){
 }
 
 function progressBar(position,totalCombos){
+    if (position === totalCombos){
+        $('#stop-search').hide();
+        $('#fourthstep').show();
+    }
     $('.progress-bar').attr('aria-valuenow',position*100/totalCombos); 
     $('.progress-bar').css('width',position*100/totalCombos+'%');
     $('.progress-bar-title').text(parseInt(position*100/totalCombos)+'% complete');
@@ -204,4 +215,50 @@ function progressBar(position,totalCombos){
     $('#fourthstep').show();
      $('#btn_edit').show();
     stopSearching = true;
+  })
+
+  var snapSlider = document.getElementById('slider-snap');
+
+  noUiSlider.create(snapSlider, {
+	start: [ 3.5, 4.2 ],
+    step: 0.1,
+	connect: true,
+	range: {
+		'min': [2.1],
+		// '10%': 50,
+		// '20%': 100,
+		// '30%': 150,
+		// '40%': 500,
+		// '50%': 800,
+		'max': [6]
+	}
+});
+$('.noUi-handle-lower').append('<span id="slider-snap-value-lower"></span>');
+$('.noUi-handle-upper').append('<span id="slider-snap-value-upper"></span>');
+
+var snapValues = [
+	document.getElementById('slider-snap-value-lower'),
+	document.getElementById('slider-snap-value-upper')
+];
+
+snapSlider.noUiSlider.on('update', function( values, handle ) {
+	snapValues[handle].innerHTML = values[handle];
+});
+
+$('#slider-snap-value-lower').on('DOMSubtreeModified',function(e){
+    var minElixir = (Number)($('#slider-snap-value-lower').text());
+    var  button = Url.parseQuery($('#check-combos').attr('data-combos'));
+    button['minElixir'] = minElixir;
+    var query = Url.stringify(button);
+        $('#check-combos').attr('data-combos',query);
+        $('#start-search').attr('data-combos',query);
+  })
+
+  $('#slider-snap-value-upper').on('DOMSubtreeModified',function(e){
+    var maxElixir = (Number)($('#slider-snap-value-upper').text());
+    var  button = Url.parseQuery($('#check-combos').attr('data-combos'));
+    button['maxElixir'] = maxElixir;
+    var query = Url.stringify(button);
+        $('#check-combos').attr('data-combos',query);
+        $('#start-search').attr('data-combos',query);
   })

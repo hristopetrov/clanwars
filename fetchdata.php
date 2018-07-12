@@ -45,10 +45,10 @@ function file_get_contents_curl($url) {
    if($rip || $bad || $mediocre){
         return false;
     }else{
-        if($godly){
+        if($godly > 1){
             return 'gold';
         }
-        if(($great) && ($godly == 0)){
+        if(($great) && ($godly == 1)){
             return 'silver';
         }
         return 'bronze';

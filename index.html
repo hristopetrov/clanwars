@@ -53,7 +53,10 @@
 </head>
 <body>
         <div class="container allcardslist" id="firststep">
-            <div class="jumbotron jumbotron-fluid bg-dark"><h2 class="text-white">Select the cards you want to include in the search<span class="btn btn-primary pull-right" id="btn_edit" style="display:none">
+            <div class="jumbotron jumbotron-fluid bg-dark"><h2 class="text-white">Select the cards you want to include in the search  <!-- Button trigger modal -->
+                <button type="button" id="mymodal" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Example
+                      </button><span class="btn btn-primary pull-right" id="btn_edit" style="display:none">
                     <a href="#" class="btn btn-outline-secondary">Edit</a>
                 </span></h2></div>
                 <div id="card_picker" class="card_picker clearfix list-of-cards">
@@ -201,6 +204,16 @@
     <div class="container list-greatest-decks">
 
     </div>
+    <!-- Modal -->
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img src="example.gif">
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 <script src="js/app.js"></script>              

@@ -135,3 +135,5 @@ h1{
 .noUi-connect{
     background: magenta;
 }
+.modal-dialog{text-align:center;}
+.modal-content{display:inline-block;}

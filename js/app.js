@@ -137,7 +137,6 @@ function fetchDeck(url,urlsArray,position){
                 stopSearching = false;
                 return;
             }
-        //console.log(data);
         var totalCombos = urlsArray.length;
         if(data !== false){            
             renderDeck(data,position,url);
@@ -225,11 +224,6 @@ function progressBar(position,totalCombos){
 	connect: true,
 	range: {
 		'min': [2.1],
-		// '10%': 50,
-		// '20%': 100,
-		// '30%': 150,
-		// '40%': 500,
-		// '50%': 800,
 		'max': [6]
 	}
 });

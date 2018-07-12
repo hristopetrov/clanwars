@@ -11,7 +11,7 @@ $allCards = isset($_POST) ? $_POST : '';
 $sumElixirConstantCards = isset($_POST['sumElixirConstantCards']) ? $_POST['sumElixirConstantCards'] : '';
 $minElixir = isset($_POST['minElixir']) ? $_POST['minElixir'] : 0;
 $maxElixir = isset($_POST['maxElixir']) ? $_POST['maxElixir'] : 7;
-unset($allCards['maxElixir']);
+unset($allCards['minElixir']);
 unset($allCards['maxElixir']);
 unset($allCards['sumElixirConstantCards']);
 unset($allCards['howmany']);

@@ -1,5 +1,7 @@
 <?php
 require_once 'cardtypes.php';
+
+$url = 'Zap-Hunter-PEKKA-Hog-Guards-eWiz-SpearGobs-Lava';
 function getContents($str, $startDelimiter, $endDelimiter) {
     $contents = array();
     $startDelimiterLength = strlen($startDelimiter);
@@ -18,7 +20,6 @@ function getContents($str, $startDelimiter, $endDelimiter) {
     return $contents;
   }
 
-$url = isset($_POST) ? key($_POST) : '';
 
 function file_get_contents_curl($url) {
     $ch = curl_init();
@@ -41,17 +42,11 @@ function file_get_contents_curl($url) {
     $mediocre = substr_count($data,'>Mediocre<');
     $rip = substr_count($data,'>RIP<');
     $bad = substr_count($data,'>Bad<');
-
-   if($rip || $bad || $mediocre){
+    
+    if($rip || $bad || $mediocre){
         return false;
     }else{
-        if($godly){
-            return 'gold';
-        }
-        if(($great) && ($godly == 0)){
-            return 'silver';
-        }
-        return 'bronze';
+        return 'good';
     }
 }
     $deckFromUrl = explode('-',$url);
@@ -59,16 +54,6 @@ function file_get_contents_curl($url) {
     $deck = explode('-',$url);
 
     $data = file_get_contents_curl("https://www.deckshop.pro/check/?deck=".$url);
-    
-    if($data === 'gold'){
-        echo json_encode(['type'=>'gold','deck'=>$deck]);
-    }
-    if($data === 'silver'){
-        echo json_encode(['type'=>'silver','deck'=>$deck]);
-    }
-    if($data === 'bronze'){
-        echo json_encode(['type'=>'bronze','deck'=>$deck]);
-    }
-    if($data === false){
-        echo json_encode(false);
-    }
+
+    var_dump($data);
+   

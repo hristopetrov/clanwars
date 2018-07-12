@@ -193,9 +193,9 @@ function renderDeck(data,position,url){
         }
         $('.deck[data-deck="'+position+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
     });
-   if(data.type === 'gold'){
-       $('html, body').animate({scrollTop:$(".gold").offset().top}, 'slow');
-   }
+//    if(data.type === 'gold'){
+//        $('html, body').animate({scrollTop:$(".gold").offset().top}, 'slow');
+//    }
 }
 
 function progressBar(position,totalCombos){

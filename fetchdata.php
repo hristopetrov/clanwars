@@ -17,6 +17,10 @@ function getContents($str, $startDelimiter, $endDelimiter) {
   
     return $contents;
   }
+function getPoints($godly,$great,$good){
+    $points =  (3 * $godly) + (2 * $great) + (1 * $good);
+    return $points; 
+}
 
 $url = isset($_POST) ? key($_POST) : '';
 
@@ -41,17 +45,22 @@ function file_get_contents_curl($url) {
     $mediocre = substr_count($data,'>Mediocre<');
     $rip = substr_count($data,'>RIP<');
     $bad = substr_count($data,'>Bad<');
-
+    
+    
    if($rip || $bad || $mediocre){
         return false;
     }else{
-        if($godly > 1){
+        $points = getPoints($godly,$great,$good);
+        if($points >= 9){
             return 'gold';
         }
-        if(($great) && ($godly == 1)){
+        if(($points < 9)&&($points > 6)){
             return 'silver';
         }
-        return 'bronze';
+        if($points <= 6){
+            return 'bronze';
+        }
+        return false;
     }
 }
     $deckFromUrl = explode('-',$url);

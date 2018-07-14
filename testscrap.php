@@ -1,7 +1,7 @@
 <?php
 require_once 'cardtypes.php';
 
-$url = 'Zap-Hunter-PEKKA-Hog-Guards-eWiz-SpearGobs-Lava';
+$url = 'Hunter-PEKKA-eWiz-Lava-3M-Giant-MM-Tombstone';
 function getContents($str, $startDelimiter, $endDelimiter) {
     $contents = array();
     $startDelimiterLength = strlen($startDelimiter);
@@ -33,6 +33,18 @@ function file_get_contents_curl($url) {
     $wholePage = curl_exec($ch);
     curl_close($ch);
 
+    $problemsArr = getContents($wholePage,'<span class="badge badge-danger text-black font-weight-bold">','</span>');
+    $warningsArr = getContents($wholePage,'<span class="badge badge-warning text-black font-weight-bold">','</span');
+    if(!empty($problemsArr)){
+        $problems = $problemsArr[0];
+    }else{
+        $problems = 0;
+    }
+    if(!empty($warningsArr)){
+        $warnings = $warningsArr[0];
+    }else{
+        $warnings = 0;
+    }
     $dataArray = getContents($wholePage,'<table class="table table-inverse mb-3">','</table>');
     $data = $dataArray[0];
 
@@ -43,11 +55,7 @@ function file_get_contents_curl($url) {
     $rip = substr_count($data,'>RIP<');
     $bad = substr_count($data,'>Bad<');
     
-    if($rip || $bad || $mediocre){
-        return false;
-    }else{
-        return 'good';
-    }
+    return ['problems'=> $problems,'warnings'=>$warnings ];
 }
     $deckFromUrl = explode('-',$url);
 
@@ -55,5 +63,5 @@ function file_get_contents_curl($url) {
 
     $data = file_get_contents_curl("https://www.deckshop.pro/check/?deck=".$url);
 
-    var_dump($data);
+    print_r($data);
    

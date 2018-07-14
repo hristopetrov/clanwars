@@ -185,17 +185,25 @@ function renderNumberCombos(result){
 }
 
 function renderDeck(data,position,url){
+    var countRecomends = (Number)(data.recomendations.problems) + (Number)(data.recomendations.warnings);
+    if(countRecomends > 2){
+        countRecomends = 2;
+    }
     $('.list-greatest-decks').append('<div class="col-md-3 col-sm-6 deck-container"><div data-deck="'+position+'" class="deck '+data.type+'"></div></div>');
-    $('.deck[data-deck="'+position+'"]').append('<div class="elixir">'+getElixir(url)+' <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;"></div><a target="_blank" href="https://www.deckshop.pro/check/?deck='+url+'"><div class="type-deck-'+data.type+'">More Info</div></a></br>'); 
+    $('.deck[data-deck="'+position+'"]').append('<div class="info-deck"><div class="elixir">'+getElixir(url)+' <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;"></div><a target="_blank" href="https://www.deckshop.pro/check/?deck='+url+'"><div class="type-deck-'+data.type+' recomendations-cnt-'+countRecomends+'">More Info</div></a></div>'); 
     $.each(data.deck,function(index,value){
         if(index === 4){
             $('.deck[data-deck="'+position+'"]').append('</br>');   
         }
         $('.deck[data-deck="'+position+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
     });
-//    if(data.type === 'gold'){
-//        $('html, body').animate({scrollTop:$(".gold").offset().top}, 'slow');
-//    }
+    
+    $.each(data.recomendations,function(index,value){
+        if (value){
+            $('[data-deck='+position+'] a').append('<span class="pull-right '+index+'">'+value+'</span>');
+        }
+    })
+    
 }
 
 function progressBar(position,totalCombos){

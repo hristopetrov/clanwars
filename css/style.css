@@ -110,19 +110,24 @@ h1{
 }
 .type-deck-bronze, .type-deck-silver, .type-deck-gold{
     display: inline-block;
-    /* width: 72%; */
     text-align: center;
     border-radius: 5px;
 }
 
 .type-deck-bronze{
     background-color: #cd7f32;
+    color: #343a40!important;
+    font-weight: 700;
 }
 .type-deck-silver{
     background-color: silver;
+    color: #343a40!important;
+    font-weight: 700;
 }
 .type-deck-gold{
     background-color: gold;
+    color: #343a40!important;
+    font-weight: 700;
 }
 
 #slider-snap-value-lower, 
@@ -144,7 +149,9 @@ h1{
     text-align: center;
     border-radius: 5px;
     margin-top: 3px;
-    margin-right: 2px; 
+    margin-right: 2px;
+    color: black;
+    font-weight: 700;
 }
 
 .problems{
@@ -154,12 +161,14 @@ h1{
     border-radius: 5px;
     margin-top: 3px;
     margin-right: 2px; 
+    color: black;
+    font-weight: 700;
 }
 .recomendations-cnt-2{
     width: 48%;
 }
 .recomendations-cnt-1{
-    width: 62%;
+    width: 61%;
 }
 .recomendations-cnt-0{
     width: 72%;

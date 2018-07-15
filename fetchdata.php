@@ -17,8 +17,8 @@ function getContents($str, $startDelimiter, $endDelimiter) {
   
     return $contents;
   }
-function getPoints($godly,$great,$good,$warnings,$problems){
-    $points =  (3 * $godly) + (2 * $great) + (1 * $good) - (1 * $problems) - (0.5 * $warnings);
+function getPoints($godly,$great,$good){
+    $points =  (3 * $godly) + (2 * $great) + (1 * $good) ;
     return $points; 
 }
 
@@ -63,7 +63,7 @@ function file_get_contents_curl($url) {
    if($rip || $bad || $mediocre){
         return false;
     }else{
-        $points = getPoints($godly,$great,$good,$warnings,$problems);
+        $points = getPoints($godly,$great,$good);
         if($points >= 10){
             return [
                 'type'=>'gold',
@@ -82,7 +82,7 @@ function file_get_contents_curl($url) {
                     ]
                 ];
         }
-        if(($points > 5)&&($points <= 7)){
+        if($points === 7){
             return [
                 'type'=>'bronze',
                 'recomendations'=>[
@@ -107,15 +107,4 @@ function file_get_contents_curl($url) {
         echo json_encode($data);
     }
     
-    // if($data === 'gold'){
-    //     echo json_encode(['type'=>'gold','deck'=>$deck]);
-    // }
-    // if($data === 'silver'){
-    //     echo json_encode(['type'=>'silver','deck'=>$deck]);
-    // }
-    // if($data === 'bronze'){
-    //     echo json_encode(['type'=>'bronze','deck'=>$deck]);
-    // }
-    // if($data === false){
-    //     echo json_encode(false);
-    // }
+  

@@ -1,26 +1,4 @@
 <?php
-require_once 'cardtypes.php';
-function getContents($str, $startDelimiter, $endDelimiter) {
-    $contents = array();
-    $startDelimiterLength = strlen($startDelimiter);
-    $endDelimiterLength = strlen($endDelimiter);
-    $startFrom = $contentStart = $contentEnd = 0;
-    while (false !== ($contentStart = strpos($str, $startDelimiter, $startFrom))) {
-      $contentStart += $startDelimiterLength;
-      $contentEnd = strpos($str, $endDelimiter, $contentStart);
-      if (false === $contentEnd) {
-        break;
-      }
-      $contents[] = substr($str, $contentStart, $contentEnd - $contentStart);
-      $startFrom = $contentEnd + $endDelimiterLength;
-    }
-  
-    return $contents;
-  }
-function getPoints($godly,$great,$good){
-    $points =  (3 * $godly) + (2 * $great) + (1 * $good) ;
-    return $points; 
-}
 
 $url = isset($_POST) ? key($_POST) : '';
 
@@ -36,21 +14,14 @@ function file_get_contents_curl($url) {
     $wholePage = curl_exec($ch);
     curl_close($ch);
 
-    $problemsArr = getContents($wholePage,'<span class="badge badge-danger text-black font-weight-bold">','</span>');
-    $warningsArr = getContents($wholePage,'<span class="badge badge-warning text-black font-weight-bold">','</span');
-    if(!empty($problemsArr)){
-        $problems = $problemsArr[0];
-    }else{
-        $problems = 0;
-    }
-    if(!empty($warningsArr)){
-        $warnings = $warningsArr[0];
-    }else{
-        $warnings = 0;
-    }
+    preg_match("'<span class=\"badge badge-danger text-black font-weight-bold\">(.*?)</span>'si", $wholePage, $problemsArr);
+    preg_match("'<span class=\"badge badge-warning text-black font-weight-bold\">(.*?)</span>'si", $wholePage, $warningsArr);
+   
+    !empty($problemsArr) ? $problems = $problemsArr[1] : $problems = 0;
+    !empty($warningsArr) ? $warnings = $warningsArr[1] : $warnings = 0;
 
-    $dataArray = getContents($wholePage,'<table class="table table-inverse mb-3">','</table>');
-    $data = $dataArray[0];
+    preg_match("'<table class=\"table table-inverse mb-3\">(.*?)</table>'si", $wholePage, $dataArray);
+    $data = $dataArray[1];
 
     $godly = substr_count($data,'>Godly!<');
     $great = substr_count($data,'>Great!<');
@@ -63,33 +34,24 @@ function file_get_contents_curl($url) {
    if($rip || $bad || $mediocre){
         return false;
     }else{
-        $points = getPoints($godly,$great,$good);
+        $points = (3 * $godly) + (2 * $great) + (1 * $good) ;
+        $deckInfo =  [
+            'recomendations'=>[
+                'problems'=>$problems,
+                'warnings'=>$warnings
+                ]
+            ];
         if($points >= 10){
-            return [
-                'type'=>'gold',
-                'recomendations'=>[
-                    'problems'=>$problems,
-                    'warnings'=>$warnings
-                    ]
-                ];
+            $deckInfo['type'] = 'gold';
+            return $deckInfo;
         }
         if(($points > 7)&&($points < 10)){
-            return [
-                'type'=>'silver',
-                'recomendations'=>[
-                    'problems'=>$problems,
-                    'warnings'=>$warnings
-                    ]
-                ];
+            $deckInfo['type'] = 'silver';
+            return $deckInfo;
         }
         if($points === 7){
-            return [
-                'type'=>'bronze',
-                'recomendations'=>[
-                    'problems'=>$problems,
-                    'warnings'=>$warnings
-                    ]
-                ];
+            $deckInfo['type'] = 'bronze';
+            return $deckInfo;
         }
         return false;
     }

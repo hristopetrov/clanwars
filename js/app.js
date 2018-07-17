@@ -81,6 +81,7 @@
     $('#stop-search').show();
     $('#fourthstep').hide();
     $('#btn_edit').hide();
+    $('#nodecks').remove();
     $('.list-greatest-decks').children().remove();
     var urlstring =  $('#start-search').attr('data-combos');
     var data = Url.parseQuery(urlstring);
@@ -213,6 +214,8 @@ function progressBar(position,totalCombos){
     if (position === totalCombos){
         $('#stop-search').hide();
         $('#fourthstep').show();
+        $('#btn_edit').show();
+        checkForDecks();
     }
     $('.progress-bar').attr('aria-valuenow',position*100/totalCombos); 
     $('.progress-bar').css('width',position*100/totalCombos+'%');
@@ -226,7 +229,11 @@ function progressBar(position,totalCombos){
      $('#btn_edit').show();
     stopSearching = true;
   })
-
+  function checkForDecks(){
+    if($('.list-greatest-decks').children().length === 0){
+        $('.list-greatest-decks').append('<h2 id="nodecks" class="alert alert-danger">No useful decks were found</h2>');
+    }
+  }
   var snapSlider = document.getElementById('slider-snap');
 
   noUiSlider.create(snapSlider, {

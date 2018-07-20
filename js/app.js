@@ -116,33 +116,34 @@ function startSearchingDecks(answer){
 }
 function processUrl(data){
    var urlsArray = data;
-    fetchUrl(urlsArray,0); 
+   var chunkedArray = chunkArray(urlsArray,10); 
+    fetchUrl(chunkedArray,0); 
  }
 
-function fetchUrl(urlsArray,position){
-    if(position < urlsArray.length){ 
-      fetchDeck(urlsArray[position],urlsArray,position); 
+function fetchUrl(chunkedArray,position){
+    if(position < chunkedArray.length){ 
+      fetchDeck(chunkedArray[position],chunkedArray,position)
     }
 }
 var stopSearching = false;
 
-function fetchDeck(url,urlsArray,position){
-    
+function fetchDeck(urlsArray,wholeArray,position){  
+         
     $.ajax({
         type:"POST",
         url:"fetchdata.php",
-        data:url,
+        data:{urlsArray},
         dataType: 'JSON',
         success:function(data){
+            //console.log(data);
             if(stopSearching) {
                 stopSearching = false;
                 return;
             }
-        var totalCombos = urlsArray.length;
-        if(data !== false){            
-            renderDeck(data,position,url);
-        }
-        fetchUrl(urlsArray,++position) 
+        var totalCombos = wholeArray.length;
+       
+        renderDeck(data,position);
+        fetchUrl(wholeArray,++position) 
         progressBar(position,totalCombos);
         }
     });
@@ -185,26 +186,30 @@ function renderNumberCombos(result){
        }
 }
 
-function renderDeck(data,position,url){
-    var recomendationsKindCnt = 0;
-    $.each(data.recomendations,function(index,value){
-        if(value){
-            recomendationsKindCnt++;
-        }
-    });
-    
-    $('.list-greatest-decks').append('<div class="col-md-3 col-sm-6 deck-container"><div data-deck="'+position+'" class="deck '+data.type+'"></div></div>');
-    $('.deck[data-deck="'+position+'"]').append('<div class="info-deck"><div class="elixir">'+getElixir(url)+' <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;"></div><a target="_blank" href="https://www.deckshop.pro/check/?deck='+url+'"><div class="type-deck-'+data.type+' recomendations-cnt-'+recomendationsKindCnt+'">More Info</div></a></div>'); 
-    $.each(data.deck,function(index,value){
-        if(index === 4){
-            $('.deck[data-deck="'+position+'"]').append('</br>');   
-        }
-        $('.deck[data-deck="'+position+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
-    });
-    
-    $.each(data.recomendations,function(index,value){
-        if (value){
-            $('[data-deck='+position+'] a').append('<span class="pull-right '+index+'">'+value+'</span>');
+function renderDeck(data,position){
+    $.each(data,function(deckNumber,deck){
+        if(deck.type){
+            console.log(deck.deck)
+            var recomendationsKindCnt = 0;
+            $.each(deck.recomendations,function(index,value){
+                if(value){
+                    recomendationsKindCnt++;
+                }
+            });
+            $('.list-greatest-decks').append('<div class="col-md-3 col-sm-6 deck-container"><div data-deck="'+position+deckNumber+'" class="deck '+deck.type+'"></div></div>');
+                $('.deck[data-deck="'+position+deckNumber+'"]').append('<div class="info-deck"><div class="elixir">'+getElixir(deck.deck.join('-'))+' <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;"></div><a target="_blank" href="https://www.deckshop.pro/check/?deck='+deck.deck.join('-')+'"><div class="type-deck-'+deck.type+' recomendations-cnt-'+recomendationsKindCnt+'">More Info</div></a></div>'); 
+                $.each(deck.deck,function(index,value){
+                    if(index === 4){
+                        $('.deck[data-deck="'+position+deckNumber+'"]').append('</br>');   
+                    }
+                    $('.deck[data-deck="'+position+deckNumber+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
+                });
+                
+                $.each(deck.recomendations,function(index,value){
+                    if (value){
+                        $('[data-deck='+position+deckNumber+'] a').append('<span class="pull-right '+index+'">'+value+'</span>');
+                    }
+                });
         }
     })
     
@@ -274,3 +279,16 @@ $('#slider-snap-value-lower').on('DOMSubtreeModified',function(e){
         $('#check-combos').attr('data-combos',query);
         $('#start-search').attr('data-combos',query);
   })
+
+function chunkArray(myArray, chunk_size){
+    var index = 0;
+    var arrayLength = myArray.length;
+    var tempArray = [];
+    
+    for (index = 0; index < arrayLength; index += chunk_size) {
+        myChunk = myArray.slice(index, index+chunk_size);
+        tempArray.push(myChunk);
+    }
+
+    return tempArray;
+}

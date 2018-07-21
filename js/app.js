@@ -175,14 +175,14 @@ function getElixir(url){
     return (sumElixir/8).toFixed(1);
 }
 function renderNumberCombos(result){
-    if((result > "10000")){
+    if((result > 100000)){
         $('#ncombos').html('Too many combinations - '+result+'! Please choose less cards or put mandatory of the chosen one.').removeAttr('class').addClass('alert alert-danger');
        }
-       if((result > 5000) && (result <=10000)){
-           $('#ncombos').html('This will take a while - '+result+' combinations! It will take about '+Math.round(result*1.6/60)+' minutes!').removeAttr('class').addClass('alert alert-warning');
+       if((result > 50000) && (result <=100000)){
+           $('#ncombos').html('This will take a while - '+result+' combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-warning');
        }
-       if(result <= 5000){
-           $('#ncombos').html('There are '+result+' possible combinations! It will take about '+Math.round(result*1.6/60)+' minutes!').removeAttr('class').addClass('alert alert-success');
+       if(result <= 50000){
+           $('#ncombos').html('There are '+result+' possible combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-success');
        }
 }
 
@@ -292,3 +292,20 @@ function chunkArray(myArray, chunk_size){
 
     return tempArray;
 }
+
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+        placeholder: "Select hiding criteria",
+        width: '30%'
+    });
+});
+
+$( ".js-example-basic-multiple" ).change(function() {
+    var selectedElements = $( ".js-example-basic-multiple" ).select2('data');
+    $('.deck-container').show();
+   $.each(selectedElements,function(index,value){
+       var sel = value.text;
+       $('.'+sel).parents('.deck-container').hide();
+    });
+
+});

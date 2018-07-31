@@ -118,16 +118,19 @@ h1{
     background-color: #cd7f32;
     color: #343a40!important;
     font-weight: 700;
+    width: 48%;
 }
 .type-deck-silver{
     background-color: silver;
     color: #343a40!important;
     font-weight: 700;
+    width: 48%;
 }
 .type-deck-gold{
     background-color: gold;
     color: #343a40!important;
     font-weight: 700;
+    width: 48%;
 }
 
 #slider-snap-value-lower, 
@@ -143,7 +146,7 @@ h1{
 .modal-dialog{text-align:center;}
 .modal-content{display:inline-block;}
 
-.warnings{
+.warnings , .no-warnings{
     background:#ffc107;
     width: 11%;
     text-align: center;
@@ -154,7 +157,7 @@ h1{
     font-weight: 700;
 }
 
-.problems{
+.problems , .no-problems{
     background:#dc3545;
     width: 11%;
     text-align: center;
@@ -164,15 +167,21 @@ h1{
     color: black;
     font-weight: 700;
 }
-.recomendations-cnt-2{
-    width: 48%;
+.no-warnings, .no-problems{
+    background: green !important;
 }
-.recomendations-cnt-1{
-    width: 61%;
-}
-.recomendations-cnt-0{
-    width: 72%;
-}
-#nodecks{
+
+#nodecks, #minCards{
     text-align: center;
+}
+.white-tooltip + .tooltip > .tooltip-inner {
+    background-color: #fff;
+    color: black;
+}
+.white-tooltip + .tooltip > .tooltip-arrow { 
+    border-bottom-color:#fff; 
+}
+
+.select2-search__field {
+    width: 200px !important;
 }

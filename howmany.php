@@ -8,32 +8,31 @@ $combinatorics = new Math_Combinatorics;
 
 $allCards = isset($_POST) ? $_POST : '';
 
-$sumElixirConstantCards = isset($_POST['sumElixirConstantCards']) ? $_POST['sumElixirConstantCards'] : '';
+$sumElixirMandatoryCards = isset($_POST['sumElixirMandatoryCards']) ? $_POST['sumElixirMandatoryCards'] : 0;
 $minElixir = isset($_POST['minElixir']) ? $_POST['minElixir'] : 0;
 $maxElixir = isset($_POST['maxElixir']) ? $_POST['maxElixir'] : 7;
 unset($allCards['minElixir']);
 unset($allCards['maxElixir']);
-unset($allCards['sumElixirConstantCards']);
+unset($allCards['sumElixirMandatoryCards']);
 unset($allCards['howmany']);
 
-$constantCards = array_filter($allCards, function($a){
-    return $a === 'constant';
+$mandatoryCards = array_filter($allCards, function($a){
+    return $a === 'mandatory';
 });
 
 $allSearchableCards = array_filter($allCards, function($a){
-    return $a !== 'constant';
+    return $a !== 'mandatory';
 });
 
-//print_r($allSearchableCards);
 $constDeckCards ='';
-foreach($constantCards as $key => $value){
+foreach($mandatoryCards as $key => $value){
     $constDeckCards .= $key.'-';
 }
 
-$numberOfRestOfSearchableInput = 8 - count($constantCards);
+$numberOfRestOfSearchableInput = 8 - count($mandatoryCards);
 
 $input = array_keys($allSearchableCards);
-//print_r($input);
+
 $usedCardsType = array_intersect_key($allCardsType, $allSearchableCards);
 
 $output = $combinatorics->combinations($input, $numberOfRestOfSearchableInput); 
@@ -51,7 +50,10 @@ if($constDeckCards != ''){
 }else{
     $const = '';
 }
-
+/**
+ * filter decks that have maximum 4 common,epic,rare cards
+ * and maximum 3 legenday in a combination
+ */
 function filterReasonableDecks($restOfDeck, $usedCardsType, $constDeckCards){
     $implodedRestOfDeck = implode('-',$restOfDeck);
     $wholeDeck = explode('-',$constDeckCards.$implodedRestOfDeck);
@@ -76,13 +78,14 @@ function filterReasonableDecks($restOfDeck, $usedCardsType, $constDeckCards){
 }
 
 $linksCombos = [];
-
-$count = 0;
+/**
+ * Filter combinations for the range of average
+ * elixir and the count of card types
+ */
 foreach ($output as $key => $value) {
-	if ((getElixir($value,$allCards,intval($sumElixirConstantCards)) >=$minElixir) && (getElixir($value,$allCards, intval($sumElixirConstantCards)) <= $maxElixir) && filterReasonableDecks($value,$allCardsType,$constDeckCards)){
+	if ((getElixir($value,$allCards,intval($sumElixirMandatoryCards)) >=$minElixir) && (getElixir($value,$allCards, intval($sumElixirMandatoryCards)) <= $maxElixir) && filterReasonableDecks($value,$allCardsType,$constDeckCards)){
         $implodedRestOfDeck = implode('-',$value);
-        $elixir = getElixir($value,$allCards,$sumElixirConstantCards);
-        $count++;
+        $elixir = getElixir($value,$allCards,$sumElixirMandatoryCards);
         $linksCombos[] = $constDeckCards.$implodedRestOfDeck;
     }    
 } 

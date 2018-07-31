@@ -4,16 +4,17 @@ require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7\Request;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\RequestException;
  
 $client = new Client();
 
-$urlArray = isset($_POST) ? ($_POST['urlsArray']) : '';
+$deckParams = isset($_POST) ? ($_POST['deckParams']) : '';
 
 $deckFromUrls = [];
 
 function filterinfo($wholePage) {
+    /**
+     * The count of warnings and problems found in deck tips
+     */
     preg_match("'<span class=\"badge badge-danger text-black font-weight-bold\">(.*?)</span>'si", $wholePage, $problemsArr);
     preg_match("'<span class=\"badge badge-warning text-black font-weight-bold\">(.*?)</span>'si", $wholePage, $warningsArr);
     !empty($problemsArr) ? $problems = $problemsArr[1] : $problems = 0;
@@ -21,6 +22,9 @@ function filterinfo($wholePage) {
     preg_match("'<table class=\"table table-inverse mb-3\">(.*?)</table>'si", $wholePage, $dataArray);
     $data = $dataArray[1];
 
+    /**
+     * The count of godly, great .. etc. found in the deck rating
+     */
     $godly = substr_count($data,'>Godly!<');
     $great = substr_count($data,'>Great!<');
     $good = substr_count($data,'>Good<');
@@ -28,12 +32,15 @@ function filterinfo($wholePage) {
     $rip = substr_count($data,'>RIP<');
     $bad = substr_count($data,'>Bad<');
     
+    /**
+     * If rip bad or mediocre is found - skip.
+     */
     if($rip || $bad || $mediocre){
             return false;
         }else{
             $points = (3 * $godly) + (2 * $great) + (1 * $good) ;
             $deckInfo =  [
-                'recomendations'=>[
+                'recommendations'=>[
                     'problems'=>$problems,
                     'warnings'=>$warnings
                     ]
@@ -54,16 +61,16 @@ function filterinfo($wholePage) {
         }
 }
 $requestArr = [];
-foreach ($urlArray as $url){
-    $decksFromUrl[] = explode('-',$url);
-    $requestArr[] = $client->getAsync('https://www.deckshop.pro/check/?deck='.$url);
+foreach ($deckParams as $params){
+    $decksFromParam[] = explode('-',$params);
+    $requestArr[] = $client->getAsync('https://www.deckshop.pro/check/?deck='.$params);
 }
 $responses = Promise\unwrap($requestArr); 
 $returnData = [];
 foreach($responses as $key => $response){
-
      $returnData[$key] = filterinfo($response->getBody());
-     $returnData[$key]['deck'] =  $decksFromUrl[$key];
+     $returnData[$key]['deck'] =  $decksFromParam[$key];
 }
+
 echo json_encode($returnData);
 

@@ -20,6 +20,7 @@
       $('#next_step').attr('data-possible',query);
     }else{
        if($(this).children().first().hasClass('active')){
+	  var selectedCards = {};    
            $(this).children().first().removeClass('active');
               $('.active').parent().each(function () {
                   selectedCards[$(this).attr("data-hash")] = $(this).attr("data-elixir");

@@ -1,14 +1,20 @@
 <?php
 require 'vendor/autoload.php';
+include('simple_html_dom.php');
+
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7\Request;
- 
-$client = new Client();
+use Tuna\CloudflareMiddleware;
+use GuzzleHttp\Cookie\FileCookieJar;
+
+$cookies = getcwd() . '/cookies.txt';
+$client = new Client(['cookies' => new FileCookieJar($cookies)]);
+$client->getConfig('handler')->push(CloudflareMiddleware::create());
+
 
 $deckParams = isset($_POST) ? ($_POST['deckParams']) : '';
-
 $deckFromUrls = [];
 
 function filterinfo($wholePage) {
@@ -21,6 +27,19 @@ function filterinfo($wholePage) {
     !empty($warningsArr) ? $warnings = $warningsArr[1] : $warnings = 0;
     preg_match("'<table class=\"table table-inverse mb-3\">(.*?)</table>'si", $wholePage, $dataArray);
     $data = $dataArray[1];
+
+    $html = str_get_html($data);
+  
+    $tdText=[];
+    foreach($html->find('td') as $element){
+        $tdText[] = $element->plaintext;
+    } 
+    $deckRating = array();
+    foreach ($tdText as $k => $v) {
+        if ($k % 2 !== 0) {
+            $deckRating[] = $v;
+        }
+    }
 
     /**
      * The count of godly, great .. etc. found in the deck rating
@@ -43,7 +62,11 @@ function filterinfo($wholePage) {
                 'recommendations'=>[
                     'problems'=>$problems,
                     'warnings'=>$warnings
-                    ]
+                ],
+                'deffense'=>$deckRating[0],
+                'offense'=>$deckRating[1],
+                'versatility' => $deckRating[2],
+                'synergy' =>$deckRating[3]
                 ];
             if($points >= 10){
                 $deckInfo['type'] = 'gold';

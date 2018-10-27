@@ -20,7 +20,7 @@
       $('#next_step').attr('data-possible',query);
     }else{
        if($(this).children().first().hasClass('active')){
-	  var selectedCards = {};    
+        var selectedCards = {};
            $(this).children().first().removeClass('active');
               $('.active').parent().each(function () {
                   selectedCards[$(this).attr("data-hash")] = $(this).attr("data-elixir");
@@ -242,12 +242,14 @@ function renderNumberCombos(result){
         $('#ncombos').html('Too many combinations - '+result+'! Please choose less cards or put mandatory of the chosen one.').removeAttr('class').addClass('alert alert-danger');
        }
        if((result > 50000) && (result <=100000)){
-           $('#ncombos').html('This will take a while - '+result+' combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-warning');
+           $('#ncombos').html('This will take a while - '+result+' combinations!').removeAttr('class').addClass('alert alert-warning');
        }
        if(result <= 50000){
-           $('#ncombos').html('There are '+result+' possible combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-success');
+           $('#ncombos').html('There are '+result+' possible combinations!').removeAttr('class').addClass('alert alert-success');
        }
 }
+
+
 /**
  * Contains collection of decks
  * @param {Object} data Info with the type, cards and recommendations
@@ -258,25 +260,51 @@ function renderDeck(data){
         if(deck.type){
             //Random hash for each deck
             var randomId =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            $('.list-greatest-decks').append('<div class="col-md-3 col-sm-6 deck-container"><div data-deck="'+randomId+'" class="deck '+deck.type+'"></div></div>');
-                //Print the average elixir, the more info link with the type of the deck color
-                $('.deck[data-deck="'+randomId+'"]').append('<div class="info-deck"><div class="elixir">'+getElixir(deck.deck)+' <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;"></div><a target="_blank" href="https://www.deckshop.pro/check/?deck='+deck.deck.join('-')+'"><div class="type-deck-'+deck.type+'">More Info</div></a></div>'); 
-                //Print the 8 cards i 2 rows
-                $.each(deck.deck,function(index,value){
-                    if(index === 4){
-                        $('.deck[data-deck="'+randomId+'"]').append('</br>');   
-                    }
-                    $('.deck[data-deck="'+randomId+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
-                });
-                //Print the deck recommendations  - problems and warnings and their count.
-                $.each(deck.recommendations,function(index,value){
-                    //If there are warnings or problems, the colors are yellow and red. If none - green.
-                    if (value){
-                        $('[data-deck='+randomId+'] a').append('<span title="" data-original-title="'+index+'" data-toggle="tooltip"  class="white-tooltip pull-right '+index+'">'+value+'</span>');
-                    }else{
-                        $('[data-deck='+randomId+'] a').append('<span title="" data-original-title="'+index+'" data-toggle="tooltip"  class="white-tooltip pull-right no-'+index+'">'+value+'</span>');                        
-                    }
-                });
+            $('.list-greatest-decks').append('<div class="col-md-3 col-sm-6 deck-container">\
+                                                <div data-deck="'+randomId+'" class="deck '+deck.type+'">\
+                                                </div>\
+                                              </div>');
+            //Print the average elixir, the more info link with the type of the deck color
+            $('.deck[data-deck="'+randomId+'"]').append('<div class="info-deck">\
+                                                            <div class="elixir">'+getElixir(deck.deck)+'\
+                                                                <img src="cards-images/elixirdrop.png" height="20" style="margin-top: -4px;">\
+                                                            </div>\
+                                                            <a target="_blank" \
+                                                            href="https://www.deckshop.pro/check/?deck='+deck.deck.join('-')+'">\
+                                                                <div class="type-deck-'+deck.type+'">More Info\
+                                                            </div>\
+                                                            </a>\
+                                                        </div>');
+            $('.deck[data-deck="'+randomId+'"]').append('<div class="rating">\
+                                                            <div class="deffense">Defensive potential\
+                                                            <span class="'+deck.deffense+' pull-right">'+deck.deffense+'</span>\
+                                                            </div>\
+                                                            <div class="offense">Offensive potential\
+                                                            <span class="'+deck.offense+' pull-right">'+deck.offense+'</span>\
+                                                            </div>\
+                                                            <div class="versatility">Versatility\
+                                                            <span class="'+deck.versatility+' pull-right">'+deck.versatility+'</span>\
+                                                            </div>\
+                                                            <div class="synergy">Synergy\
+                                                            <span class="'+deck.synergy+' pull-right">'+deck.synergy+'</span>\
+                                                            </div>\
+                                                        </div>');
+            //Print the 8 cards i 2 rows
+            $.each(deck.deck,function(index,value){
+                if(index === 4){
+                    $('.deck[data-deck="'+randomId+'"]').append('</br>');   
+                }
+                $('.deck[data-deck="'+randomId+'"]').append('<span><img class="deck-card" src="cards-images/'+value+'.png"></span>');
+            });
+            //Print the deck recommendations  - problems and warnings and their count.
+            $.each(deck.recommendations,function(index,value){
+                //If there are warnings or problems, the colors are yellow and red. If none - green.
+                if (value){
+                    $('[data-deck='+randomId+'] a').append('<span title="" data-original-title="'+index+'" data-toggle="tooltip"  class="white-tooltip pull-right '+index+'">'+value+'</span>');
+                }else{
+                    $('[data-deck='+randomId+'] a').append('<span title="" data-original-title="'+index+'" data-toggle="tooltip"  class="white-tooltip pull-right no-'+index+'">'+value+'</span>');                        
+                }
+            });
         }
     })
     

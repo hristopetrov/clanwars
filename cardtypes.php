@@ -88,5 +88,7 @@ $allCardsType = [ 'PEKKA' => 'epic',
             'InfernoD'=> 'legendary',
             'MagicArcher' => 'legendary',
             'Snowball' => 'common',
-            'RoyalHogs' => 'rare'
+            'RoyalHogs' => 'rare',
+            'GobGiant' => 'epic',
+            'RoyalRecruits' => 'common'
 ];

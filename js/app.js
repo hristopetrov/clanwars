@@ -242,10 +242,10 @@ function renderNumberCombos(result){
         $('#ncombos').html('Too many combinations - '+result+'! Please choose less cards or put mandatory of the chosen one.').removeAttr('class').addClass('alert alert-danger');
        }
        if((result > 50000) && (result <=100000)){
-           $('#ncombos').html('This will take a while - '+result+' combinations!').removeAttr('class').addClass('alert alert-warning');
+           $('#ncombos').html('This will take a while - '+result+' combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-warning');
        }
        if(result <= 50000){
-           $('#ncombos').html('There are '+result+' possible combinations!').removeAttr('class').addClass('alert alert-success');
+           $('#ncombos').html('There are '+result+' possible combinations! It will take about '+Math.round(result*1.5/600)+' minutes!').removeAttr('class').addClass('alert alert-success');
        }
 }
 

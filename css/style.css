@@ -28,7 +28,7 @@
     filter: grayscale(70%);
 }
 body{
-    background-color: #212523 !important;
+    background-color:  #292b2c !important;
 }
 a:hover>img.cr-card {
 opacity: 0.8 !important;
@@ -76,7 +76,7 @@ h1{
     width: 24.9%;
 }
 .deck-container{
-    margin-bottom: 2rem!important
+    margin-bottom: 5rem!important
 }
 
 .link-deckshop{
@@ -104,6 +104,10 @@ h1{
 
 .silver{
     display: inline-block;
+}
+.container-fluid{
+    background-color:#343a40;
+    margin: 20px 0;
 }
 .list-greatest-decks{
     padding: 40px 0;
@@ -185,3 +189,38 @@ h1{
 .select2-search__field {
     width: 200px !important;
 }
+.deffense , .offense , .versatility , .synergy{
+    color: #7a858c !important;
+    padding: 0 4px;
+    border-top: 6px solid #222;
+    padding:0.5rem;
+}
+.rating {
+    background-color: #252627;
+    margin: 3px 0;
+}
+.Godly\!{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: -webkit-linear-gradient(left, magenta 0%,magenta 30%,#0f0 50%,yellow 80%,magenta 100%) 0 0 repeat-x;
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 1s linear infinite;
+}
+.Good{
+    color:#28a745!important
+}
+.Great\!{
+    font-size: 1.2em;
+    font-weight: bold;
+    color:#28a745!important;
+}
+@keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }

@@ -9,8 +9,9 @@ use GuzzleHttp\Psr7\Request;
 use Tuna\CloudflareMiddleware;
 use GuzzleHttp\Cookie\FileCookieJar;
 
-$cookies = getcwd() . '/cookies.txt';
-$client = new Client(['cookies' => new FileCookieJar($cookies)]);
+//$client = new Client();
+$client = new Client(['cookies' => new FileCookieJar('cookies.txt')]);
+
 $client->getConfig('handler')->push(CloudflareMiddleware::create());
 
 
@@ -27,6 +28,9 @@ function filterinfo($wholePage) {
     !empty($warningsArr) ? $warnings = $warningsArr[1] : $warnings = 0;
     preg_match("'<table class=\"table table-inverse mb-3\">(.*?)</table>'si", $wholePage, $dataArray);
     $data = $dataArray[1];
+
+    // preg_match_all("'text-right\">(.*?)</td>'si",$data,$rating);
+    // $deckRating = $rating[1];
 
     $html = str_get_html($data);
   

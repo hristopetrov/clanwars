@@ -33,7 +33,7 @@ function filterinfo($wholePage) {
     // $deckRating = $rating[1];
 
     $html = str_get_html($data);
-  
+
     $tdText=[];
     foreach($html->find('td') as $element){
         $tdText[] = $element->plaintext;
